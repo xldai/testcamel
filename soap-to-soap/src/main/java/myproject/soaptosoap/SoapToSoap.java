@@ -2,7 +2,12 @@ package myproject.soaptosoap;
 
 import org.apache.camel.CamelContext;
 import org.apache.camel.component.cxf.CxfEndpoint;
+import org.apache.camel.component.cxf.CxfEndpointConfigurer;
 import org.apache.camel.main.Main;
+import org.apache.cxf.endpoint.Client;
+import org.apache.cxf.endpoint.Server;
+import org.apache.cxf.frontend.AbstractWSDLBasedEndpointFactory;
+import org.apache.cxf.transport.http.HTTPConduit;
 
 public class SoapToSoap extends org.apache.camel.builder.RouteBuilder {
 
@@ -26,6 +31,27 @@ public class SoapToSoap extends org.apache.camel.builder.RouteBuilder {
                 + "&defaultOperationNamespace=http://www.talend.org/service/"
                 + "&defaultOperationName=DemoServiceOperation"
                 + "&continuationTimeout=80000");
+
+        endpoint_cCXF_2.setCxfEndpointConfigurer(new CxfEndpointConfigurer() {
+
+            @Override
+            public void configure(AbstractWSDLBasedEndpointFactory arg0) {
+
+            }
+
+            @Override
+            public void configureClient(Client client) {
+                HTTPConduit httpConduit = (HTTPConduit)client.getConduit();
+                httpConduit.getClient().setConnectionTimeout(60000);
+                httpConduit.getClient().setReceiveTimeout(60000);
+            }
+
+            @Override
+            public void configureServer(Server server) {
+
+            }
+
+        });
 
 		from(endpoint_cCXF_1)
 				.routeId("cCXF_1")
