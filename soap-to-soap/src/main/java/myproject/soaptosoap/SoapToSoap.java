@@ -44,6 +44,8 @@ public class SoapToSoap extends org.apache.camel.builder.RouteBuilder {
                 HTTPConduit httpConduit = (HTTPConduit)client.getConduit();
                 httpConduit.getClient().setConnectionTimeout(60000);
                 httpConduit.getClient().setReceiveTimeout(60000);
+                httpConduit.getClient().setAsyncExecuteTimeout(60000);
+                //httpConduit.getClient().setAsyncExecuteTimeoutRejection(true);
             }
 
             @Override

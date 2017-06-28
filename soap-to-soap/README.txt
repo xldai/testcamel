@@ -47,3 +47,7 @@ after 30 sec, return HTTP 200 and Body:
       </typ:DemoServiceOperationRequest>
    </soap:Body>
 </soap:Envelope>
+
+but if setConnectionTimeout()/setReceiveTimeout() < 30 sec, then return HTTP 500 and Fault (as expected)
+    httpConduit.getClient().setConnectionTimeout(20000);
+    httpConduit.getClient().setReceiveTimeout(20000);
