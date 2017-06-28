@@ -24,7 +24,8 @@ public class SoapToSoap extends org.apache.camel.builder.RouteBuilder {
                 + "&serviceNameString={http://www.talend.org/service/}DemoService"
 				+ "&endpointNameString={http://www.talend.org/service/}DemoServicePort"
                 + "&defaultOperationNamespace=http://www.talend.org/service/"
-                + "&defaultOperationName=DemoServiceOperation");
+                + "&defaultOperationName=DemoServiceOperation"
+                + "&continuationTimeout=80000");
 
 		from(endpoint_cCXF_1)
 				.routeId("cCXF_1")
