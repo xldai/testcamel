@@ -21,8 +21,9 @@ public class SoapToSoap extends org.apache.camel.builder.RouteBuilder {
         ((org.apache.camel.impl.DefaultCamelContext) camelContext).setRegistry(compositeRegistry);
 
         org.apache.camel.component.cxf.CxfEndpoint endpoint_cCXF_1 = (CxfEndpoint) endpoint(
-                "cxf://" + "http://localhost:8060/services/DemoServiceProxy" + "?dataFormat=PAYLOAD" + "&loggingFeatureEnabled=true" + "&wsdlURL="
-                        + "classpath:/config/DemoWsdl_0.1.wsdl");
+                "cxf://" + "http://localhost:8060/services/DemoServiceProxy" 
+                + "?dataFormat=PAYLOAD" + "&loggingFeatureEnabled=true" 
+                + "&wsdlURL=" + "classpath:/config/DemoWsdl_0.1.wsdl");
 
         CxfEndpoint endpoint_cCXF_2 = (CxfEndpoint) endpoint("cxf://" + "http://localhost:8050/services/DemoService"
                 + "?dataFormat=PAYLOAD" + "&wsdlURL=" + "classpath:/config/DemoService_0.1.wsdl"
@@ -58,10 +59,9 @@ public class SoapToSoap extends org.apache.camel.builder.RouteBuilder {
 		from(endpoint_cCXF_1)
 				.routeId("cCXF_1")
 				.removeHeaders("*")
-				.id("cJavaDSLProcessor_1")
 				.setBody()
 				.simple("<typ:DemoServiceOperationRequest xmlns:typ=\"http://www.talend.org/service/\"><in>hello</in></typ:DemoServiceOperationRequest>")
-				.id("cSetBody_1").to(endpoint_cCXF_2).id("cCXF_2");
+				.to(endpoint_cCXF_2);
     }
 
     public void run() throws java.lang.Exception {

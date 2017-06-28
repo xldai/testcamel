@@ -22,10 +22,8 @@ public class DemoSoap extends org.apache.camel.builder.RouteBuilder {
 		from(endpoint_cCXF_1)
 				.routeId("ResourceAsServiceCXF_cCXF_1")
 				.delay(120000)
-				.id("cDelayer_1")
 				.setBody()
-				.simple("<ser:DemoServiceOperationResponse xmlns:ser=\"http://www.talend.org/service/\"><out>hi</out></ser:DemoServiceOperationResponse>")
-				.id("cSetBody_2");
+				.simple("<ser:DemoServiceOperationResponse xmlns:ser=\"http://www.talend.org/service/\"><out>hi</out></ser:DemoServiceOperationResponse>");
     }
 
     public void run() throws java.lang.Exception {
