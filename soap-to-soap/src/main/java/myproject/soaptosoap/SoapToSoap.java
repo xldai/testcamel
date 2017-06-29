@@ -23,15 +23,15 @@ public class SoapToSoap extends org.apache.camel.builder.RouteBuilder {
         org.apache.camel.component.cxf.CxfEndpoint endpoint_cCXF_1 = (CxfEndpoint) endpoint(
                 "cxf://" + "http://localhost:8060/services/DemoServiceProxy" 
                 + "?dataFormat=PAYLOAD" + "&loggingFeatureEnabled=true" 
-                + "&wsdlURL=" + "classpath:/config/DemoWsdl_0.1.wsdl");
+                + "&wsdlURL=" + "classpath:/config/DemoWsdl_0.1.wsdl"
+                + "&continuationTimeout=70000");
 
         CxfEndpoint endpoint_cCXF_2 = (CxfEndpoint) endpoint("cxf://" + "http://localhost:8050/services/DemoService"
                 + "?dataFormat=PAYLOAD" + "&wsdlURL=" + "classpath:/config/DemoService_0.1.wsdl"
                 + "&serviceNameString={http://www.talend.org/service/}DemoService"
 				+ "&endpointNameString={http://www.talend.org/service/}DemoServicePort"
                 + "&defaultOperationNamespace=http://www.talend.org/service/"
-                + "&defaultOperationName=DemoServiceOperation"
-                + "&continuationTimeout=80000");
+                + "&defaultOperationName=DemoServiceOperation");
 
         endpoint_cCXF_2.setCxfEndpointConfigurer(new CxfEndpointConfigurer() {
 
@@ -42,10 +42,10 @@ public class SoapToSoap extends org.apache.camel.builder.RouteBuilder {
 
             @Override
             public void configureClient(Client client) {
-                HTTPConduit httpConduit = (HTTPConduit)client.getConduit();
-                httpConduit.getClient().setConnectionTimeout(60000);
-                httpConduit.getClient().setReceiveTimeout(60000);
-                httpConduit.getClient().setAsyncExecuteTimeout(60000);
+                //HTTPConduit httpConduit = (HTTPConduit)client.getConduit();
+                //httpConduit.getClient().setConnectionTimeout(60000);
+                //httpConduit.getClient().setReceiveTimeout(60000);
+                //httpConduit.getClient().setAsyncExecuteTimeout(60000);
                 //httpConduit.getClient().setAsyncExecuteTimeoutRejection(true);
             }
 
